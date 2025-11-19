@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../api/fakestoreApi";
-import QuantitySelect from "../components/QuantitySelect";
-import { useAppDispatch } from "../hooks/reduxhooks";
+import { useAppDispatch } from "../hooks/reduxHooks";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/Error";
-import { addItem } from "../store/CartSlice";
+import { addItem , updateQty } from "../store/CartSlice";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
+import type { CartItem } from "../types/cart";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -20,11 +20,17 @@ export default function ProductDetail() {
     skip: Number.isNaN(numericId),
   });
 
-  const cart = useSelector((state: RootState) => state.cart.items);
-  const alreadySelected = cart.some((c) => c.id === Number(id));
-
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState<number>(0);
+  const [selected, setselected] = useState<CartItem | null>(null);
   const dispatch = useAppDispatch();
+
+  const cart = useSelector((state: RootState) => state.cart.items);
+
+  useEffect(() => {
+    const alreadySelected = cart.find((c) => c.id === Number(id));
+    setQty(alreadySelected?.qty ?? 1);
+    setselected(alreadySelected ?? null);
+  }, [cart]);
 
   if (isLoading) return <Loading />;
   if (error) return <ErrorMessage>Failed to load product.</ErrorMessage>;
@@ -40,12 +46,38 @@ export default function ProductDetail() {
         qty,
       })
     );
-
-    window.alert("Added to cart");
   };
 
+  const Increment = () => {
+    setQty((prev) => {
+      const next = prev + 1;
+      dispatch(
+        updateQty({
+          id: product.id,
+          qty: next,
+        })
+      );
+      return next;
+    });
+  };
+
+  const Decrement = () => {
+    setQty((prev) => {
+      const next =  prev - 1; 
+      dispatch(
+        updateQty({
+          id: product.id,
+          qty: next < 1 ? 0 : next,
+        })
+      );
+      return next < 1 ? 1 : next;;
+    });
+  };
+
+  console.log(qty);
+
   return (
-    <div className="flex flex-col p-10 gap-10">
+    <div className="flex flex-col p-10 gap-10 w-full min-h-[100vh] justify-center items-center">
       <div className="w-full flex justify-around items-center gap-10">
         <div className="w-[40%]">
           <img src={product.image} alt={product.title} />
@@ -54,8 +86,8 @@ export default function ProductDetail() {
           <h2 className="font-semibold text-2xl">{product.title}</h2>
           <p className="text-xl font-regular">{product.description}</p>
 
-          <div className="bg-black h-[40px] w-[100px] rounded-md relative">
-            <button className="text-2xl text-white bg-green-600 rounded-md h-[40px] w-[100px] font-semibold absolute bottom-1 right-1 ">
+          <div className="bg-black h-10 w-[100px] rounded-md relative">
+            <button className="text-2xl text-white bg-purple-500 rounded-md h-10 w-[100px] font-semibold absolute bottom-1 right-1 ">
               ₹{product.price}
             </button>
           </div>
@@ -64,8 +96,14 @@ export default function ProductDetail() {
             <label>Qty: </label>
             <QuantitySelect value={qty} onChange={setQty} min={1} max={5} />
           </div> */}
-          {alreadySelected ? (
-            <></>
+          {selected ? (
+            <div>
+              <button className="flex text-xl gap-6 bg-purple-300 rounded-md py-2 px-2 border-2 border-purple-700 ">
+                <div onClick={Decrement}>-</div>
+                <div>{selected.qty}</div>
+                <div onClick={Increment}>+</div>
+              </button>
+            </div>
           ) : (
             <div>
               <button
