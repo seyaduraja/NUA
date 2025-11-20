@@ -11,7 +11,7 @@ function ProductCard({ product }: { product: Product }) {
     >
       <div className="w-full h-full flex flex-col p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md bg-white">
 
-        {/* Image container */}
+
         <div className="flex-1 flex items-center justify-center overflow-hidden rounded-md">
           <img
             src={product.image}
@@ -20,12 +20,12 @@ function ProductCard({ product }: { product: Product }) {
           />
         </div>
 
-        {/* Title */}
+
         <p className="font-semibold text-sm mt-3 line-clamp-2">
           {product.title}
         </p>
 
-        {/* Price */}
+
         <p className="font-bold text-lg text-green-700">₹{product.price}</p>
       </div>
     </Link>

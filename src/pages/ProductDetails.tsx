@@ -8,6 +8,7 @@ import { addItem , updateQty } from "../store/CartSlice";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import type { CartItem } from "../types/cart";
+import  NavBar  from "../components/NavBar";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -74,12 +75,15 @@ export default function ProductDetail() {
     });
   };
 
-  console.log(qty);
-
   return (
-    <div className="flex flex-col p-10 gap-10 w-full min-h-[100vh] justify-center items-center">
+    <>
+    <div className="w-full px-5 pt-5">
+    <NavBar />
+    </div>
+    <div className="flex flex-col px-10 gap-10 w-full min-h-screen justify-center items-center">
+      
       <div className="w-full flex justify-around items-center gap-10">
-        <div className="w-[40%]">
+        <div className="w-[40%] flex justify-center items-center">
           <img src={product.image} alt={product.title} />
         </div>
         <div className="w-[60%] flex flex-col gap-5">
@@ -92,10 +96,6 @@ export default function ProductDetail() {
             </button>
           </div>
 
-          {/* <div>
-            <label>Qty: </label>
-            <QuantitySelect value={qty} onChange={setQty} min={1} max={5} />
-          </div> */}
           {selected ? (
             <div>
               <button className="flex text-xl gap-6 bg-purple-300 rounded-md py-2 px-2 border-2 border-purple-700 ">
@@ -121,5 +121,6 @@ export default function ProductDetail() {
         </div>
       </div>
     </div>
+    </>
   );
 }
