@@ -43,10 +43,10 @@ const Checkout = () => {
       <div className="w-full px-5 pt-5">
         <NavBar />
       </div>
-      <div className="p-10 flex flex-col gap-10 ">
+      <div className="md:p-10 py-10 px-4 flex flex-col gap-10 ">
         <h1 className="font-semibold text-4xl ">Checkout</h1>
         <div className="w-full flex flex-col gap-20 justify-center items-center  ">
-          <table className="bg-gray-100 w-3/4 overflow-hidden rounded-md shadow-lg ">
+          <table className="bg-gray-100 w-full md:w-3/4 overflow-hidden rounded-md shadow-lg ">
             <thead >
               <tr className="bg-purple-300">
                 <th className="w-1/4 py-2">Product</th>
@@ -79,7 +79,7 @@ const Checkout = () => {
             </tbody>
           </table>
 
-          <form onSubmit={(e) => handleSubmit(e)} className="w-3/4 flex flex-col justify-center gap-7 ">
+          <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-3/4 flex flex-col justify-center gap-7 ">
             <div className="flex flex-col">
               <h2 className="font-semibold text-2xl mb-3">Shipping Information</h2>
               <p className="text-xs">*fill the details to place the order</p>
@@ -88,7 +88,7 @@ const Checkout = () => {
               <label htmlFor="">Full Name</label>
               <input value={form.name} type="text" onChange={(e) => setForm(
                 { ...form, name: e.target.value }
-              )} placeholder="Enter your full name" className="w-1/2 p-3 rounded-md bg-gray-100" />
+              )} placeholder="Enter your full name" className=" w-full md:w-1/2 p-3 rounded-md bg-gray-100" />
               {errors.name && <div className="text-red-400">{errors.name}</div>}
             </div>
 
@@ -96,7 +96,7 @@ const Checkout = () => {
               <label htmlFor="">Email</label>
               <input value={form.email} onChange={(e) => setForm(
                 { ...form, email: e.target.value }
-              )} type="text" placeholder="Enter your Email" className="w-1/2 p-3 rounded-md bg-gray-100" />
+              )} type="text" placeholder="Enter your Email" className="w-full md:w-1/2 p-3 rounded-md bg-gray-100" />
               {errors.email && <div className="text-red-400">{errors.email}</div>}
             </div>
 
@@ -104,7 +104,7 @@ const Checkout = () => {
               <label htmlFor="">Address</label>
               <input value={form.address} type="text" onChange={(e) => setForm(
                 { ...form, address: e.target.value }
-              )} placeholder="Enter your address" className="w-1/2 p-3  rounded-md bg-gray-100" />
+              )} placeholder="Enter your address" className=" w-full md:w-1/2 p-3 rounded-md bg-gray-100" />
               {errors.address && <div className="text-red-400">{errors.address}</div>}
             </div>
 

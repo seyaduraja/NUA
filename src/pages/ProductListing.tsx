@@ -43,7 +43,7 @@ export default function ProductListing() {
       </div>
       <div className="w-full flex flex-col px-10 py-10 gap-10 ">
         <div className="w-full flex justify-between items-center ">
-          <div className="w-full flex items-center gap-3 bg-purple-600/10 p-4 rounded-xl backdrop-blur-sm border border-purple-300/30">
+          <div className="w-full flex flex-col md:flex-row items-center gap-3 bg-purple-600/10 p-4 rounded-xl backdrop-blur-sm border border-purple-300/30">
             <input
               placeholder="Search products..."
               value={search}
@@ -70,7 +70,7 @@ export default function ProductListing() {
         {loading ? (
           <Loading />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 place-items-center">
             {filtered?.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}

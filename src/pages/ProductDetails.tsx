@@ -82,15 +82,15 @@ export default function ProductDetail() {
     <div className="w-full px-5 pt-5">
     <NavBar />
     </div>
-    <div className="flex flex-col px-10 gap-10 w-full min-h-screen justify-center items-center">
+    <div className="flex flex-col px-10 py-10 md:py-0 gap-10 w-full min-h-screen justify-center items-center">
       
-      <div className="w-full flex justify-around items-center gap-10">
-        <div className="w-[40%] flex justify-center items-center">
+      <div className="w-full flex flex-col md:flex-row justify-around items-center gap-10">
+        <div className="w-full md:w-[40%] flex justify-center items-center">
           <img src={product.image} alt={product.title} />
         </div>
-        <div className="w-[60%] flex flex-col gap-5">
-          <h2 className="font-semibold text-2xl">{product.title}</h2>
-          <p className="text-xl font-regular">{product.description}</p>
+        <div className="w-full md:w-[60%] flex flex-col gap-5">
+          <h2 className="font-semibold md:text-xl lg:text-2xl">{product.title}</h2>
+          <p className=" text-base lg:text-xl font-regular">{product.description}</p>
 
           <div className="bg-black h-10 w-[100px] rounded-md relative">
             <button className="text-2xl text-white bg-purple-500 rounded-md h-10 w-[100px] font-semibold absolute bottom-1 right-1 ">
