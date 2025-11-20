@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import React from "react";
 import {
   useGetProductsQuery,
@@ -7,11 +7,13 @@ import {
 } from "../api/fakestoreApi";
 
 const ProductCard = React.lazy(() => import("../components/ProductCard"));
-const NavBar = React.lazy(() => import('../components/NavBar'))
+const NavBar = React.lazy(() => import("../components/NavBar"));
+const Loading = React.lazy(() => import("../components/Loading"));
 
 export default function ProductListing() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
+  const [loading, setLoading] = useState<boolean>(true);
 
   const { data: categoriesData, isLoading: loadingCategories } =
     useGetCategoriesQuery();
@@ -27,6 +29,12 @@ export default function ProductListing() {
       p.title.toLowerCase().includes(search.toLowerCase())
     );
   }, [products, search]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <>
@@ -59,11 +67,15 @@ export default function ProductListing() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
-          {filtered?.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
+            {filtered?.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

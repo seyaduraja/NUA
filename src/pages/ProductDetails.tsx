@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../api/fakestoreApi";
 import { useAppDispatch } from "../hooks/reduxHooks";
-import Loading from "../components/Loading";
 import ErrorMessage from "../components/Error";
 import { addItem , updateQty } from "../store/CartSlice";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import type { CartItem } from "../types/cart";
-import  NavBar  from "../components/NavBar";
+import React from "react";
+
+const NavBar = React.lazy(() => import('../components/NavBar'))
+const Loading = React.lazy(() => import('../components/Loading'))
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();

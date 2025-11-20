@@ -6,7 +6,7 @@ import logo from "../assets/logo.png"
 const NavBar = () => {
     const cart = useSelector((state: RootState) => state.cart.items);
 
-    const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+    const totalQty = cart.length;
 
 
     return (
