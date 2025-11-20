@@ -1,10 +1,13 @@
 import { useSelector } from "react-redux"
+import React from "react";
 import type { RootState } from "../store/store";
 import { useState } from "react";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { clearCart } from "../store/CartSlice";
 import { useNavigate } from "react-router-dom";
-import  NavBar  from "../components/NavBar";
+
+
+const NavBar = React.lazy(() => import('../components/NavBar'))
 
 
 

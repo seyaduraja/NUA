@@ -108,7 +108,7 @@ export default function ProductDetail() {
             <div>
               <button
                 onClick={handleAdd}
-                className="rounded-md px-6 py-3 text-base bg-purple-200 text-purple-700 font-semibold border-[1px] border-purple-700"
+                className="rounded-md px-6 py-3 text-base bg-purple-200 text-purple-700 font-semibold border border-purple-700"
               >
                 Add to Cart +
               </button>

@@ -3,7 +3,9 @@ import type { RootState } from "../store/store";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { updateQty } from "../store/CartSlice";
 import { Link } from "react-router-dom";
-import  NavBar  from "../components/NavBar";
+import React from "react";
+
+const NavBar = React.lazy(() => import('../components/NavBar'))
 
 const Cart = () => {
 

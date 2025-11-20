@@ -1,9 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage.tsx';
-import ProductDetails from './pages/ProductDetails.tsx';
-import ProductListing from './pages/ProductListing.tsx';
-import Cart from './pages/Cart.tsx';
-import Checkout from './pages/Checkout.tsx';
+import React from 'react';
+
+const Checkout = React.lazy(() => import('./pages/Checkout.tsx'))
+const HomePage = React.lazy(() => import('./pages/HomePage.tsx'))
+const ProductDetails = React.lazy(() => import('./pages/ProductDetails.tsx'))
+const Cart = React.lazy(() => import('./pages/Cart.tsx'))
+const ProductListing = React.lazy(() => import('./pages/ProductListing.tsx'))
 
 
 function App() {

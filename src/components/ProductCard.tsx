@@ -7,9 +7,9 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       to={`/product/${product.id}`}
-      className="block w-[400px] h-[400px] hover:scale-[1.02] transition-transform"
+      className="block w-[400px] h-[450px] hover:scale-[1.02] transition-transform"
     >
-      <div className="w-full h-full flex flex-col p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md bg-white">
+      <div className="w-full h-full flex flex-col p-4 gap-2 border border-gray-200 rounded-lg shadow-sm hover:shadow-md bg-white">
 
 
         <div className="flex-1 flex items-center justify-center overflow-hidden rounded-md">
@@ -26,7 +26,11 @@ function ProductCard({ product }: { product: Product }) {
         </p>
 
 
-        <p className="font-bold text-lg text-green-700">₹{product.price}</p>
+          <div className="bg-black h-10 w-[100px] rounded-md relative">
+            <button className="text-2xl text-white bg-purple-500 rounded-md h-10 w-[100px] font-semibold absolute bottom-1 right-1 ">
+              ₹{product.price}
+            </button>
+          </div>
       </div>
     </Link>
 
